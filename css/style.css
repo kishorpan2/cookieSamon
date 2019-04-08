@@ -1,5 +1,22 @@
-h1{background-color:black;
+body{background-color:black;
   font-size:30px; 
   font-style:italic;
-  color:white;
+  color:rgb(133, 103, 103);
+}
+nav ul li {
+  float: right;
+  display: block;
+  margin:18 px;
+}
+nav ul{ 
+  display: in-line
+}
+footer{
+  background-color:rgb(161, 157, 156);
+}
+.fish{
+  margin-top: 10 px;
+}
+#two{
+  font-style: italic;
 }
