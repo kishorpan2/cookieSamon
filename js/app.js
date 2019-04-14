@@ -1,7 +1,6 @@
 'use strict';
 var allStores =[];
 var hourList = ['6am','7am','8am', '9am','10','11am','12pm','1pm','2pm','3pm','4pm','5pm','6pm','7pm','8pm'];
-
 function CookieStore (location, mincustomer, maxCustomer, avgCookieSale) {
   this.minCustPerHour = mincustomer;
   this.maxCustPerHour = maxCustomer;
@@ -140,8 +139,6 @@ function handleDataSubmit(e){
 
   renderAll();
 }
-
-
 function renderAll(){
   fillCustomerandSales();
 
