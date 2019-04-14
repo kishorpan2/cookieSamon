@@ -1,9 +1,6 @@
 'use strict';
 var allStores =[];
 var hourList = ['6am','7am','8am', '9am','10','11am','12pm','1pm','2pm','3pm','4pm','5pm','6pm','7pm','8pm'];
-var ourlocation =['pike','alki','seattle','seatac','capitol'];
-
-
 function CookieStore (location, mincustomer, maxCustomer, avgCookieSale) {
   this.minCustPerHour = mincustomer;
   this.maxCustPerHour = maxCustomer;
@@ -14,11 +11,11 @@ function CookieStore (location, mincustomer, maxCustomer, avgCookieSale) {
   this.TotalCookieForDay = 0;
   allStores.push(this);
 }
-var pike = new CookieStore ('1 st and Pike',23,65,6.3);
-var seatac = new CookieStore ('SeaTac', 3,24,1.2);
-var sea = new CookieStore ('Seattle Center',3,24,2.3);
-var capitol = new CookieStore ('Capitol', 20,38,2.3);
-var alki = new CookieStore ('Alki', 2,16,4.6);
+new CookieStore ('1 st and Pike',23,65,6.3);
+new CookieStore ('SeaTac', 3,24,1.2);
+new CookieStore ('Seattle Center',3,24,2.3);
+new CookieStore ('Capitol', 20,38,2.3);
+new CookieStore ('Alki', 2,16,4.6);
 
 // populate customer and sales per hour
 function fillCustomerandSales(){
@@ -33,7 +30,8 @@ function popCustomer(store){
   }
 }
 function popSales(store){
-  for(var i=0; i<15;i++){
+  console.log('total cookie',store.TotalCookieForDay);
+  for(var i=0; i<hourList.length;i++){
     store.cookiesEachHr[i] = Math.ceil(store.custEachHour[i]*store.avgCookieSale);
     store.TotalCookieForDay += store.cookiesEachHr[i];
   }
@@ -123,24 +121,14 @@ function handleDataSubmit(e){
   //previous table
   console.log(e);
   var parent = document.getElementById('tabl');
-  // var location = e.target.loc.value.toLowerCase();
-  // if(ourlocation.includes(location)){
-  //   //updating one of the current locations
-  //   for(var i =0 ; i<allStores.length; i++){
-  //     if(allStores[i].locationName===e.target[1].value){
-  //       allStores[i].minCustPerHr = parseInt(e.target[2].value);
-  //       allStores[i].maxCustPerHr = parseInt(e.target[3].value);
-  //       allStores[i].avgCookieSale = parseInt(e.target[4].value);
-  //       allStores[i].totalSales=0;
-  //     }
-  //   }
+ 
   var formLocation = e.target[1].value.toLowerCase();
   var formMin = parseInt(e.target[2].value);
   var formMax = parseInt(e.target[3].value);
   var formAvg = parseInt(e.target[4].value);
   var newStore = new CookieStore (formLocation, formMin,formMax, formAvg); 
   popCustomer(newStore); 
-  popSales(newStore);
+  //popSales(newStore);
   console.log(newStore);
   
   //clear previous table
@@ -148,33 +136,9 @@ function handleDataSubmit(e){
   {
     parent.removeChild(parent.firstChild);
   }
-  // //updating the table
-  // e.target.loc.value =null;
-  // e.target.minCus.value= null;
-  // e.target.maxCus.value = null;
-  // e.target.avgCus.value=null;
 
   renderAll();
-  
-  //if the location submitted is a new location
-  // else{
-  //   ourlocation.push(location);
-  //   var newLocation = new CookieStore(e.target.locName.value,parseInt(e.target.min.value),parseInt(e.target.max.value),parseInt(e.target.avg.value));
-  //   allStores.push(newLocation);
-  //   //clear previous table
-  //   while(parent.hasChildNodes())
-  //   {
-  //     parent.removeChild(parent.firstChild);
-  //   }
-  //   e.target.locName.value =null;
-  //   e.target.min.value= null;
-  //   e.target.max.value = null;
-  //   e.target.avg.value=null;
-  //   renderAll();
-  // }
 }
-
-
 function renderAll(){
   fillCustomerandSales();
 
